@@ -10,23 +10,23 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-//@PropertySource("classpath:/integration/appnexus.properties")
+@PropertySource("classpath:/integration/nci.properties")
 @ComponentScan({
-//    "com.varick.metadsp.controller.appnexus",
-//    "com.varick.metadsp.integration.appnexus"
+        "com.personal.controller.nci",
+        "com.personal.integration.nci"
 })
 
 public class NciApiConfig {
 
-//    @Value("${apnx.baseUrl}")
+    @Value("${nci.baseUrl}")
     private String baseUrl;
 
     @Bean
-    public RestTemplate apnxRestTemplate(RestTemplateBuilder builder) {
+    public RestTemplate nciRestTemplate(RestTemplateBuilder builder) {
         return builder
-            .defaultMessageConverters()
-            .rootUri(baseUrl)
-            .build();
+                .defaultMessageConverters()
+                .rootUri(baseUrl)
+                .build();
     }
 
 }

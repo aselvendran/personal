@@ -10,18 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import java.util.Arrays;
 
-//@SpringBootApplication(scanBasePackages = "com.varick.metadsp")
-//public class Application {
-//
-//    public static void main(String[] args) {
-//        new SpringApplicationBuilder()
-//            .sources(Application.class)
-//            .bannerMode(Banner.Mode.OFF)
-//            .run(args);
-//    }
-//
-//}
-
 
 @SpringBootApplication(scanBasePackages = "com.personal")
 
