@@ -1,45 +1,34 @@
 package com.personal.controller.nci
 
-import okhttp3.OkHttpClient
+import com.fasterxml.jackson.databind.JsonNode
+import com.personal.integration.nci.NciService
 import org.slf4j.LoggerFactory
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.context.request.WebRequest
+
 
 @RestController
 @RequestMapping("/api/athavantest")
-class NciDiseaseController {
+class NciDiseaseController(
+    private val nciService: NciService
+) {
 
     var Logger = LoggerFactory.getLogger(NciDiseaseController::class.java)
 
-    @GetMapping
-    fun getAll(@RequestParam(defaultValue = "0") page: Long): String {
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.reddit.com")
-            .addConverterFactory(JacksonConverterFactory.create())
-            .build()
-//
-//        redditApi = retrofit.create(Any)
+    @GetMapping("/{diseaseId}")
+    fun getAll(@PathVariable diseaseId: String, webRequest: WebRequest): JsonNode {
 
 
-        val client = OkHttpClient
-            .Builder()
-            .build()
+        val params = webRequest.parameterMap
 
-        val retrofit2 = Retrofit.Builder()
-            .baseUrl("https://www.reddit.com")
-//            .addConverterFactory(ScalarsConverterFactory.create())
-//            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()))
-            .client(client)
-            .build()
+        val parameterIterated = LinkedMultiValueMap<String, String>()
 
-        System.out.println("AthavanTestingValues:  ")
+        for ((key, value) in params) {
+            parameterIterated.add(key, value[0])
+        }
 
-        return retrofit2.toString()
+        return nciService.getAllDisease("diseases", parameterIterated)
 
 
     }
