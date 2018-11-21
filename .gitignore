@@ -10,7 +10,7 @@ gradlew.bat
 
 # Ignore actual properties, not .properties.sample
 # Don't want to commit passwords or testing urls
-/src/main/resources/integration/*.properties
+#/src/main/resources/integration/*.properties
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
