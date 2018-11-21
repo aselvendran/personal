@@ -28,6 +28,7 @@ class NciDiseaseController(
             parameterIterated.add(key, value[0])
         }
 
+
         return nciService.getAllDisease("diseases", parameterIterated)
 
 
